@@ -20,7 +20,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y gcc
+        sudo apt-get install -y gcc clang-tidy
 
     - name: Build
       run: |
@@ -29,6 +29,11 @@ jobs:
 
     - name: Test
       run: ./example/example
+
+    - name: Static Code Analysis
+      run: |
+        cd example
+        clang-tidy *.c -- -I../include
 
     - name: Clean
       run: |
