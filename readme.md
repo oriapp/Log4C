@@ -1,4 +1,4 @@
-# Logger Library
+# Logger4C Library
 
 ## Overview
 
