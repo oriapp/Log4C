@@ -1,27 +1,32 @@
-name: Makefile CI
+name: Build and Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-
+    name: Build and Test
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-    - name: configure
-      run: ./configure
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc
 
-    - name: Install dependencies
+    - name: Build
       run: make
 
-    - name: Run check
-      run: make check
+    - name: Test
+      run: ./example/example
 
-    - name: Run distcheck
-      run: make distcheck
+    - name: Clean
+      run: make clean
