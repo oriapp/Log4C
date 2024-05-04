@@ -24,8 +24,8 @@ jobs:
 
     - name: Build
         run: |
-          cd example
-          make all
+        cd example
+        make all
 
     - name: Test
       run: ./example/example
