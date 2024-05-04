@@ -1,27 +1,30 @@
+#include <stdio.h>
 #include "../include/logger.h"
-#include <unistd.h>
 
 int main() {
-    // Initialize logger
+    // Initialize the logger
     struct Logger logger;
-    init_logger(&logger, DEBUG, INFO, "app.log", NULL, 1, 1, 1);
+    init_logger(&logger, DEBUG, INFO, "example.log", NULL, 1, 1, 1);
 
-    // Set custom log prefix
-    set_log_prefix(&logger, "[APP]");
+    // Set a custom log message prefix
+    set_log_prefix(&logger, "[Example] ");
 
-    // Log some messages
-    log_message(&logger, INFO, "Application started.");
-    log_message(&logger, DEBUG, "Debug message.");
-    log_message(&logger, WARNING, "Warning: Something unexpected happened.");
-    log_message(&logger, ERROR, "Error: Something went wrong.");
+    // Add tags to the logger
+    add_tag(&logger, "Start");
+    log_timestamp(&logger, "Start");
+    
+    // Log messages with different log levels
+    log_message(&logger, DEBUG, "This is a debug message.");
+    log_message(&logger, INFO, "This is an info message.");
+    log_message(&logger, SUCCESS, "This is a success message.");
+    log_message(&logger, WARNING, "This is a warning message.");
+    log_message(&logger, ERROR, "This is an error message.");
 
-    // Simulate some processing
-    sleep(2);
+    // Add another tag and log the elapsed time
+    add_tag(&logger, "End");
+    log_timestamp(&logger, "End");
 
-    // Log performance metrics
-    log_message(&logger, INFO, "Processing completed.");
-
-    // Close logger
+    // Close the logger
     close_logger(&logger);
 
     return 0;
