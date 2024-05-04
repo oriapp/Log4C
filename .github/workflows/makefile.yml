@@ -31,4 +31,6 @@ jobs:
       run: ./example/example
 
     - name: Clean
-      run: make clean
+      run: |
+        cd example
+        make clean
